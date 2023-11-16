@@ -1,4 +1,5 @@
 import type { FeeData, Provider } from "./provider.js";
+import type { FetchRequest } from "../utils/fetch.js";
 /**
  *  A **NetworkPlugin** provides additional functionality on a [[Network]].
  */
@@ -140,5 +141,30 @@ export declare class FeeDataNetworkPlugin extends NetworkPlugin {
      */
     getFeeData(provider: Provider): Promise<FeeData>;
     clone(): FeeDataNetworkPlugin;
+}
+export declare class FetchUrlFeeDataNetworkPlugin extends NetworkPlugin {
+    #private;
+    /**
+     *  The URL to initialize the FetchRequest with in %%processFunc%%.
+     */
+    get url(): string;
+    /**
+     *  The callback to use when computing the FeeData.
+     */
+    get processFunc(): (f: () => Promise<FeeData>, p: Provider, r: FetchRequest) => Promise<{
+        gasPrice?: null | bigint;
+        maxFeePerGas?: null | bigint;
+        maxPriorityFeePerGas?: null | bigint;
+    }>;
+    /**
+     *  Creates a new **FetchUrlFeeDataNetworkPlugin** which will
+     *  be used when computing the fee data for the network.
+     */
+    constructor(url: string, processFunc: (f: () => Promise<FeeData>, p: Provider, r: FetchRequest) => Promise<{
+        gasPrice?: null | bigint;
+        maxFeePerGas?: null | bigint;
+        maxPriorityFeePerGas?: null | bigint;
+    }>);
+    clone(): FetchUrlFeeDataNetworkPlugin;
 }
 //# sourceMappingURL=plugins-network.d.ts.map

@@ -158,6 +158,29 @@ export class FeeDataNetworkPlugin extends NetworkPlugin {
         return new FeeDataNetworkPlugin(this.#feeDataFunc);
     }
 }
+export class FetchUrlFeeDataNetworkPlugin extends NetworkPlugin {
+    #url;
+    #processFunc;
+    /**
+     *  The URL to initialize the FetchRequest with in %%processFunc%%.
+     */
+    get url() { return this.#url; }
+    /**
+     *  The callback to use when computing the FeeData.
+     */
+    get processFunc() { return this.#processFunc; }
+    /**
+     *  Creates a new **FetchUrlFeeDataNetworkPlugin** which will
+     *  be used when computing the fee data for the network.
+     */
+    constructor(url, processFunc) {
+        super("org.ethers.plugins.network.FetchUrlFeeDataPlugin");
+        this.#url = url;
+        this.#processFunc = processFunc;
+    }
+    // We are immutable, so we can serve as our own clone
+    clone() { return this; }
+}
 /*
 export class CustomBlockNetworkPlugin extends NetworkPlugin {
     readonly #blockFunc: (provider: Provider, block: BlockParams<string>) => Block<string>;

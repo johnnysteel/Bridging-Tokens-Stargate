@@ -2,10 +2,8 @@ import { defineProperties } from "../utils/properties.js";
 
 import { assertArgument } from "../utils/index.js";
 
-import type {
-    FeeData, Provider
-} from "./provider.js";
-
+import type { FeeData, Provider } from "./provider.js";
+import type { FetchRequest } from "../utils/fetch.js";
 
 
 const EnsAddress = "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e";
@@ -227,6 +225,34 @@ export class FeeDataNetworkPlugin extends NetworkPlugin {
     clone(): FeeDataNetworkPlugin {
         return new FeeDataNetworkPlugin(this.#feeDataFunc);
     }
+}
+
+export class FetchUrlFeeDataNetworkPlugin extends NetworkPlugin {
+    readonly #url: string;
+    readonly #processFunc: (f: () => Promise<FeeData>, p: Provider, r: FetchRequest) => Promise<{ gasPrice?: null | bigint, maxFeePerGas?: null | bigint, maxPriorityFeePerGas?: null | bigint }>;
+
+    /**
+     *  The URL to initialize the FetchRequest with in %%processFunc%%.
+     */
+    get url(): string { return this.#url; }
+
+    /**
+     *  The callback to use when computing the FeeData.
+     */
+    get processFunc(): (f: () => Promise<FeeData>, p: Provider, r: FetchRequest) => Promise<{ gasPrice?: null | bigint, maxFeePerGas?: null | bigint, maxPriorityFeePerGas?: null | bigint }> { return this.#processFunc; }
+
+    /**
+     *  Creates a new **FetchUrlFeeDataNetworkPlugin** which will
+     *  be used when computing the fee data for the network.
+     */
+    constructor(url: string, processFunc: (f: () => Promise<FeeData>, p: Provider, r: FetchRequest) => Promise<{ gasPrice?: null | bigint, maxFeePerGas?: null | bigint, maxPriorityFeePerGas?: null | bigint }>) {
+        super("org.ethers.plugins.network.FetchUrlFeeDataPlugin");
+        this.#url = url;
+        this.#processFunc = processFunc;
+    }
+
+    // We are immutable, so we can serve as our own clone
+    clone(): FetchUrlFeeDataNetworkPlugin { return this; }
 }
 
 /*
