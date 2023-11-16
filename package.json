@@ -1,22 +1,29 @@
 {
-  "name": "bridge-evaluation-backend",
+  "name": "oaf",
   "version": "1.0.0",
-  "description": "",
+  "description": "My cool project",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "node nodemon"
+    "start:dev": "npx nodemon"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "crypto",
+    "xchain",
+    "blockchain"
+  ],
+  "author": "felix",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^20.9.0",
-    "typescript": "^5.2.2"
+    "@types/node": "^20.4.2",
+    "typescript": "^5.1.6"
   },
   "dependencies": {
-    "pg": "^8.11.3",
-    "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.17"
+    "ethers": "^6.6.2",
+    "pg": "^8.11.0",
+    "ts-node": "^10.9.1",
+    "typeorm": "^0.3.17",
+    "@types/node": "^18.15.11",
+    "typescript": "^5.0.3"
   }
 }
