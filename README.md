@@ -294,7 +294,7 @@ The second option seems better and more straightforward. That is the option we w
 
 <br><br>
 
-:point_right: :point_right: :point_right: **Week 4**: `[Tools, languages and packages]` Saving data to postgreSQL
+:white_check_mark: :white_check_mark: :white_check_mark: **Week 4**: `[Tools, languages and packages]` Saving data to postgreSQL
 
 ##### Learning Goals
 
@@ -359,16 +359,55 @@ The second option seems better and more straightforward. That is the option we w
 
 <br><br>
 
-**Week 5**: `[Testing]` Testing
+:point_right: :point_right: :point_right: **Week 5**: `[Saving data]` Saving data to postgreSQL
 
-- Integration tests
-- Unit tests
+##### Learning Goals
 
-**Week 6**: `[Exposing APIs]` GraphQL
+- QueryBuilder and PostgreSQL transactions: use atomic operations to save data.
+
+##### Assignment: Store data from week 3 in the postgreSQL and test its integrity
+
+`Resource`:
+
+- Typeorm [https://typeorm.io/]
+
+`Here is the step by step guide`:
+
+1. Create a function in `src/data/transaction.ts` that saves data to the db
+2. Call the function from `integrations/event_listener.ts` with the transactions that need to be saved
+3. Create a new data file `data/blockchain_indexing_status.ts` for storing the last indexed block
+4. Whenever we have successfully indexed a block, update an entry in `data/blockchain_indexing_status.ts` and sync that with `integrations/transfer_events_processor.ts`
+
+<br><br>
+
+:point_right: :point_right: :point_right: **Week 6**: `[Testing]` Testing
+
+##### Learning Goals
+
+- Unit tests: writing unit tests
+- Integration tests: writing integration
+
+##### Assignment: Store data from week 3 in the postgreSQL and test its integrity
+
+`Resource`:
+
+- Typeorm [https://typeorm.io/]
+- Jest [https://jestjs.io/docs/getting-started]
+
+`Here is the step by step guide`:
+
+1. Add the jest testing framework to your code `yarn add -D jest ts-jest @types/jest`
+2. Create a `jest.config.js` file
+3. Create for the `create` function in `data/transactions.ts`; add the tests in a file `src/tests/data/transactions.test.ts`
+4. Make sure the tests using `yarn test src/tests/data/transactions.test.ts`
+5. Create for the `saveTransactions` and `getTransactionTimestampAndInitiator` functions in `services/transaction_service.ts`; add the test in a file `src/tests/services/transaction_service.test.ts`
+6. Make sure the tests using `yarn test src/tests/services/transaction_service.test.ts`
+
+**Week 7**: `[Exposing APIs]` GraphQL
 
 - Exposing data to the external world
 - Serving requests
 
-**Week 7**: `[Exposing APIs]` Coingecko API + Twitter (optional)
+**Week 8**: `[Exposing APIs]` Coingecko API + Twitter (optional)
 
 **Week 8**: Wrap up
