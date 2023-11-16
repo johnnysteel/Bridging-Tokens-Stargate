@@ -1,3 +1,8 @@
+export interface TransactionMetaData {
+  initiatedByAddress: string;
+  initiatedAt: Date;
+}
+
 export interface TransferDetails {
   from: string;
   to: string;
@@ -6,4 +11,5 @@ export interface TransferDetails {
   transactionHash: string;
   gasUsed: bigint;
   gasPrice: bigint;
+  transactionMetaData?: TransactionMetaData
 }
