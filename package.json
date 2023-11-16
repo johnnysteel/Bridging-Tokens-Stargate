@@ -4,7 +4,12 @@
   "description": "My cool project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "test": "yarn jest --maxWorkers=1",
+    "start": "ts-node ./src/index.ts",
+    "create-db-migrations": "npx typeorm-ts-node-commonjs migration:generate -d src/data_source.ts",
+    "run-db-migrations": "npx typeorm-ts-node-commonjs migration:run -d src/data_source.ts",
+    "revert-db-migrations": "npx typeorm-ts-node-commonjs migration:revert -d src/data_source.ts",
     "start:dev": "npx nodemon"
   },
   "keywords": [
@@ -16,14 +21,16 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.4.2",
+    "@types/uuid": "^9.0.2",
     "typescript": "^5.1.6"
   },
   "dependencies": {
     "ethers": "^6.6.2",
+    "@types/node": "^20.3.1",
     "pg": "^8.11.0",
     "ts-node": "^10.9.1",
     "typeorm": "^0.3.17",
-    "@types/node": "^18.15.11",
-    "typescript": "^5.0.3"
+    "typescript": "^5.1.3",
+    "uuid": "^9.0.0"
   }
 }

@@ -246,7 +246,7 @@ git commit -am "adding-nodedemon" && git push -u origin adding-nodedemon
 
 <br><br>
 
-:point_right: :point_right: :point_right: **Week 3**: `[Using external APIs]` `[Intro to blockchains]` Cost of bridging USDC from Ethereum using Stargate
+:white_check_mark: :white_check_mark: :white_check_mark: **Week 3**: `[Using external APIs]` `[Intro to blockchains]` Cost of bridging USDC from Ethereum using Stargate
 
 ##### Learning Goals
 
@@ -294,11 +294,70 @@ The second option seems better and more straightforward. That is the option we w
 
 <br><br>
 
-**Week 4**: `[Tools, languages and packages]` Saving data to postgreSQL
+:point_right: :point_right: :point_right: **Week 4**: `[Tools, languages and packages]` Saving data to postgreSQL
 
-- Typeorm
-- Migrations
-- Relational databases and PostgreSQL
+##### Learning Goals
+
+- Relational databases and PostgreSQL: learn about relational databases with a focus on PostgreSQL
+- Typeorm: learn about ORMs and how to properly use them for interacting with DBs
+- Migrations: learn about proper version management for DBs using migrations
+
+##### Assignment: Create a schema to save the transaction data from week 3 in a postgreSQL database
+
+`Resource`:
+
+- Intro to PostgreSQL [https://medium.com/codex/intro-to-postgresql-c8da31335c34]
+  - for this step, you can skip the creation of db and use the one we have in the docker container.
+  - to start the docker container use the following
+    1. docker-compose up -d
+    2. open the following url http://localhost:5001/
+    3. login using email: admin@admin.com and password: root
+- PostgreSQL Tutorial [https://www.postgresqltutorial.com/]
+  - only do the following:
+    1. Section 1. Querying Data
+    2. Section 2. Filtering Data
+    3. Section 9. Modifying Data
+    4. Section 10. Transactions
+    5. Section 12. Managing Tables
+    6. Section 13. Understanding PostgreSQL Constraints
+    7. Section 14. PostgreSQL Data Types in Depth
+- Typeorm [https://typeorm.io/]
+  - only dp the following:
+    1. installation: [https://typeorm.io/#installation]; we already did this but just do it for completeness
+    2. Quick Start: [https://typeorm.io/#quick-start] ; again, we already did this but just finish it for completeness
+    3. Step by step guide: [https://typeorm.io/#step-by-step-guide]
+    4. Create a model: [https://typeorm.io/#create-a-model]
+    5. Create an entity: [https://typeorm.io/#create-an-entity]
+    6. Adding table columns: [https://typeorm.io/#adding-table-columns]
+    7. Creating a primary column: [https://typeorm.io/#creating-a-primary-column]
+    8. Column data types: [https://typeorm.io/#column-data-types]
+    9. Creating a new DataSource : [https://typeorm.io/#creating-a-new-datasource]; we already did this but we need it for completeness
+    10. Creating and inserting a photo into the database: [https://typeorm.io/#creating-and-inserting-a-photo-into-the-database]
+    11. Using Entity Manager: [https://typeorm.io/#using-entity-manager]
+    12. Using Repositories: [https://typeorm.io/#using-repositories]
+    13. Using QueryBuilder: [https://typeorm.io/#using-querybuilder]
+
+`Here is the step by step guide`:
+
+0. Add all the missing packages using the following: npm i uuid && npm i --save-dev @types/uuid
+1. add create-db-migrations, run-db-migrations and revert-db-migrations command scripts to package.json
+2. start the the DB docker-compose up -d
+3. Decide the data you want to keep in the database
+4. Create the transaction table with the columns for the data you want to store
+5. Create the database migrations using `npm run create-db-migrations src/migrations/CreateTransactionTable`
+
+- this should create a new file in the `src/migrations/` folder
+
+6. Run the database migrations using `npm run-db-migrations`
+
+- this should actually create a table for you in the the db
+- you can verify that the table was created by checking your db using pgadmin
+
+7. Practice reverting db migrations using `revert-db-migrations`
+
+- this will delete your table and all the data in it
+
+<br><br>
 
 **Week 5**: `[Testing]` Testing
 
